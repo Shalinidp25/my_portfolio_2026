@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --orbit-radius: 120px;
+  }
+  @media (min-width: 768px) {
+    :root {
+      --orbit-radius: 180px;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: theme('colors.background');
+  color: theme('colors.foreground');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: theme('colors.primary.DEFAULT');
+  color: theme('colors.primary.foreground');
+}
+
+/* Base scrollbar styles for webkit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #050510;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ──────────── Print / PDF Reset ──────────── */
+@media print {
+  /* Force white background and black text everywhere */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Kill all dark backgrounds, glows, blurs, and shadows */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Prevent orphans/widows */
+  p, li, h1, h2, h3, h4 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Prevent page breaks inside cards / experience blocks */
+  section, article, [class*="rounded"] {
+    break-inside: avoid;
+  }
+
+  /* A4 page margins */
+  @page {
+    margin: 1cm 1.5cm;
+    size: A4;
+  }
+}
